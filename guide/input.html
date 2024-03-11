@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta name="Author" content="wwww.xxxx.xx.xx">
+  <meta name="title" content="가이드 | 대진대학교 마이키즈핏">
+  <meta name="keywords" content="마이키즈핏">
+  <meta name="description" content="마이키즈핏">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+</head>
+<!-- body -->
+<body>
+
+  <div class="">
+    <section>
+      <p>Input</p>
+
+      <p>기본 input 스타일</p>
+      <p class="subtxt">- 기본</p>
+      <div class="iptBox">
+        <input type="text" placeholder="기본 입력 Input Box"/>
+      </div>
+
+      <p class="subtxt">- 숫자만</p>
+      <div class="iptBox">
+        <input type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"  placeholder="숫자 입력 Input Box"/>
+      </div>
+
+      <p class="subtxt">- Password</p>
+      <div class="iptBox">
+        <input type="password" placeholder="Password Input Box"/>
+      </div>
+
+      <p class="subtxt">- Select Box</p>
+      <div class="selectBox">
+        <select>
+          <option>1번</option>
+          <option>2번</option>
+          <option>3번</option>
+          <option disabled selected>4번</option>
+        </select>
+        <span class="arrow"></span>
+      </div>
+
+      <p class="subtxt">- 체크박스</p>
+      <div class="checkBox">
+        <div class="checkAll">
+          <input id="checkBox_all" name="checkBox" type="checkbox" onclick="checkBoxAll(this)">
+          <label for="checkBox_all"><span>전체 체크</span></label>
+        </div>
+        <div>
+          <input id="checkBox_01" name="checkBox" type="checkbox">
+          <label for="checkBox_01"><span>체크박스</span></label>
+        </div>
+      </div>
+
+      <div class="checkBox">
+        <div class="checkAll">
+          <input id="checkBox_all" name="checkBox" type="checkbox" onclick="checkBoxAll(this)">
+          <label for="checkBox_all"><span>전체 체크</span></label>
+        </div>
+        <div>
+          <input id="checkBox_01" name="checkBox" type="checkbox">
+          <label for="checkBox_01"><span>체크박스</span></label>
+        </div>
+      </div>
+
+
+
+      <p class="subtxt">- 라디오 박스 (텍스트)</p>
+      <div class="radioTxtBox">
+        <div>
+          <input id="radioTxtBox_01" name="radioTxt" type="radio" checked>
+          <label for="radioTxtBox_01"><span>텍스트1</span></label>
+        </div>
+        <div>
+          <input id="radioTxtBox_02" name="radioTxt" type="radio">
+          <label for="radioTxtBox_02"><span>텍스트2</span></label>
+        </div>
+      </div>
+
+
+      
+
+
+
+      
+    </section>
+  </div>
+
+</body>
+<!-- //body -->
+
+<!-- ui 동작 js 선언 -->
+<script type="text/javascript" src="../static/js/ui.js"></script>
+
+
+</html>

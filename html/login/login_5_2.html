@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta name="Author" content="wwww.xxxx.xx.xx">
+  <meta name="title" content="마이키즈핏">
+  <meta name="keywords" content="마이키즈핏">
+  <meta name="description" content="마이키즈핏">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+</head>
+<!-- body -->
+<body>
+  <!-- container -->
+  <div class="container">
+    <section>
+      <div class="loginCon">
+        <p class="fs14 cBlue mt40 mb8"><strong>아동 정보 확인</strong></p>
+        <p class="fs24 cBl mb8"><strong>회원가입 전, 아동의<br>정보 확인이 필요합니다.</strong></p>
+        <p class="fs16 cLGray mb38">아동의 이름, 생년월일, 나이, 휴대폰번호, 성별을<br>입력해 주세요.</p>
+
+        <div class="mb20">
+          <p class="fs16 fwM mb12">이름</p>
+          <input type="text" placeholder="이름을 입력해 주세요" >
+        </div>
+        <div class="mb20">
+          <p class="fs16 fwM mb12">생년월일</p>
+          <input type="text" placeholder="생년월일 6자를 입력해 주세요" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+        </div>
+        <div class="mb20">
+          <p class="fs16 fwM mb12">나이</p>
+          <div class="selectBox">
+            <select>
+              <option value="" disabled selected>선택해 주세요</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+            </select>
+            <span class="arrow"></span>
+          </div>
+        </div>
+        <div class="mb20">
+          <p class="fs16 fwM mb12">휴대폰번호</p>
+          <input type="text" placeholder="휴대폰번호를 입력해 주세요" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+        </div>
+        <div class="mb20">
+          <p class="fs16 fwM mb12">성별</p>
+          <div class="radioTxtBox">
+            <div>
+              <input id="gender_01" name="gender" type="radio" checked>
+              <label for="gender_01"><span>남자</span></label>
+            </div>
+            <div>
+              <input id="gender_02" name="gender" type="radio">
+              <label for="gender_02"><span>여자</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fixedBox">
+        <div class="btnBox">
+          <a class="btn gray h60" href="#"><span>이전</span></a>
+          <a class="btn blue h60" href="#"><span>다음</span></a>
+        </div>
+      </div>         
+    </section>
+  </div>
+  <!-- //container -->
+</body>
+<!-- //body -->
+
+<!-- ui 동작 js 선언 -->
+<script type="text/javascript" src="../../static/js/ui.js"></script>
+</html>

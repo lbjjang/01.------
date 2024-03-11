@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta name="Author" content="wwww.xxxx.xx.xx">
+  <meta name="title" content="마이키즈핏">
+  <meta name="keywords" content="마이키즈핏">
+  <meta name="description" content="마이키즈핏">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/css/datepicker.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker-full.min.js"></script> -->
+
+</head>
+<!-- body -->
+<body>
+  <header>
+    <div class="leftBox">
+      <div class="btnBox"><a class="btn back" href="#"><span>뒤로가기</span></a></div>
+      <div class="txtMenu"><span>양육일기</span></div>      
+    </div>
+    <div class="menu">
+      <div class="btnBox"><a class="btn menu" href="#"><span>메뉴</span></a></div>
+    </div>
+  </header>
+  <!-- container -->
+  <div class="container">
+
+    <section>
+
+      <div class="iptBox mt24">
+        <label>날짜</label>
+        <div class="inputDate">
+          <input class="datePicker" type="text" />
+        </div>
+        <!-- <input class="inputDate" type="text" name="datePicker" /> -->
+      </div>
+      <div class="iptBox mt24">
+        <div class="label">
+          <label>제목</label>
+          <div class="limit"><span>0</span>/200 자</div>
+        </div>        
+        <input type="text" placeholder="제목을 입력해 주세요" />
+      </div>      
+      <div class="iptBox mt24 mb20">
+        <div class="label">
+          <label>내용</label>
+          <div class="limit"><span>0</span>/1000 자</div>
+        </div>        
+        <textarea class="h310" style="resize:none;" placeholder="내용을 입력해 주세요"></textarea>
+      </div>
+
+      <p class="fs18 fwB mt40 mb12">기분은 어떠셨는지 선택해 주세요!</p>
+
+      <div class="radioTxtBox mb16">
+        <ul class="feelingList">
+          <li>
+            <input id="feeling_01" name="feeling" type="radio">
+            <label for="feeling_01"><span></span></label>  
+          </li>
+          <li>
+            <input id="feeling_02" name="feeling" type="radio">
+            <label for="feeling_02"><span></span></label>  
+          </li>
+          <li>
+            <input id="feeling_03" name="feeling" type="radio">
+            <label for="feeling_03"><span></span></label>  
+          </li>
+          <li>
+            <input id="feeling_04" name="feeling" type="radio">
+            <label for="feeling_04"><span></span></label>  
+          </li>
+        </ul>
+      </div>
+
+      <div class="fixedBox">
+        <div class="btnBox">
+          <a class="btn gray h60" href="#"><span>취소</span></a>
+          <a class="btn blue h60" href="#"><span>저장</span></a>
+        </div>
+      </div>
+    </section> 
+  </div>
+  <!-- //container -->
+</body>
+<!-- //body -->
+
+<script>
+  $( function() {
+    $( ".datePicker" ).datepicker({      
+      showOn: "button",
+      // buttonImage: "images/calendar.gif",
+      // buttonImageOnly: true,
+      dateFormat:"yy-mm-dd",
+      yearSuffix: "년", //달력의 년도 부분 뒤에 붙는 텍스트
+      monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'], //달력의 월 부분 텍스트
+      monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'], //달력의 월 부분 Tooltip 텍스트
+      dayNamesMin: ['일','월','화','수','목','금','토'],//달력의 요일 부분 텍스트
+      dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'], //달력의 요일 부분 Tooltip 텍스트
+    });
+  } );
+
+  </script>
+
+<!-- <script>
+  const elem = document.querySelector('input[name="datePicker"]');
+  const datepicker = new Datepicker(elem, {
+  }); 
+</script> -->
+
+<!-- ui 동작 js 선언 -->
+<script type="text/javascript" src="../../static/js/ui.js"></script>
+</html>

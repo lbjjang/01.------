@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta name="Author" content="wwww.xxxx.xx.xx">
+  <meta name="title" content="마이키즈핏">
+  <meta name="keywords" content="마이키즈핏">
+  <meta name="description" content="마이키즈핏">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+</head>
+<!-- body -->
+<body>
+  <header>
+    <div class="leftBox">
+      <div class="btnBox"><a class="btn back" href="#"><span>뒤로가기</span></a></div>
+      <div class="txtMenu"><span>설정</span></div>      
+    </div>
+    <div class="menu">
+      <div class="btnBox"><a class="btn menu" href="#"><span>메뉴</span></a></div>
+    </div>
+  </header>
+  <!-- container -->
+  <div class="container bgGray">
+
+    <section>
+      
+      <ul class="settingCon">
+        <li class="switchBox">
+          <p class="fs18 fwB">푸시알림</p>
+          <label class="btnToggle">
+            <input role="switch" type="checkbox" />
+          </label>  
+        </li>
+        <li class="switchBox">
+          <p class="fs18 fwB">자동로그인</p>
+          <label class="btnToggle">
+            <input role="switch" type="checkbox" />
+          </label>  
+        </li>
+        <li>
+          <p class="fs18 fwB mb16">약관동의</p>
+          <ul class="txtLinkArwList">
+            <li><div><a class="btn" href="javascript:popUp('agree_service')"><span>서비스이용약관 동의</span></a></div></li>
+            <li><div><a class="btn" href="javascript:popUp('agree_personal_info')"><span>개인정보수집이용 동의</span></a></div></li>
+            <li><div><a class="btn" href="javascript:popUp('agree_sensitive_info')"><span>민감정보수집이용 동의</span></a></div></li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="btnBox mt24"><a href="#" class="btn h48 gray logout" title=""><span>로그아웃</span></a></div>
+      <div class="mt16 mb24 txtAr"><a class="btn underLink cGray" href="#"><span>회원탈퇴</span></a></div>
+
+    </section> 
+  </div>
+  <!-- //container -->
+
+
+  <!-- dimmed -->
+  <div class="dimmed off"></div>
+  <!-- popup 하단 팝업 -->
+  <div class="popup bottom off" poptarget="agree_service">
+    <div class="popCon">
+      <div class="alrmCon">
+        <p>서비스 이용약관 동의 팝업</p>
+        <div class="btnBox"><a class="btn blue h60 popClose" href="javascript:popUpClose()"><span>확인</span></a></div>
+      </div>
+    </div>
+  </div>
+  <!-- //popup 하단 팝업 -->
+
+  <!-- popup 하단 팝업 -->
+  <div class="popup bottom off" poptarget="agree_personal_info">
+    <div class="popCon">
+      <div class="alrmCon">
+        <p>개인정보 수집이용 동의 팝업</p>
+        <div class="btnBox"><a class="btn blue h60 popClose" href="javascript:popUpClose()"><span>확인</span></a></div>
+      </div>
+    </div>
+  </div>
+  <!-- //popup 하단 팝업 -->
+
+
+  <!-- popup 하단 팝업 -->
+  <div class="popup bottom off" poptarget="agree_sensitive_info">
+    <div class="popCon">
+      <div class="alrmCon">
+        <p>민감정보 수집이용 동의 팝업</p>
+        <div class="btnBox"><a class="btn blue h60 popClose" href="javascript:popUpClose()"><span>확인</span></a></div>
+      </div>
+    </div>
+  </div>
+  <!-- //popup 하단 팝업 -->
+
+
+</body>
+<!-- //body -->
+
+<!-- ui 동작 js 선언 -->
+<script type="text/javascript" src="../../static/js/ui.js"></script>
+</html>

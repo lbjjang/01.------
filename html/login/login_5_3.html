@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta name="Author" content="wwww.xxxx.xx.xx">
+  <meta name="title" content="마이키즈핏">
+  <meta name="keywords" content="마이키즈핏">
+  <meta name="description" content="마이키즈핏">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+</head>
+<!-- body -->
+<body>
+  <!-- container -->
+  <div class="container">
+    <section>
+      <div class="loginCon">
+        <p class="fs14 cBlue mt40 mb8"><strong>서비스 이용 동의</strong></p>
+        <p class="fs24 cBl mb32"><strong>서비스 이용을 위한<br>이용약관에 동의해 주세요.</strong></p>
+
+        <div class="checkBox">
+          <div class="checkAll mb20 boxLine">
+            <input id="clause_all" name="check_clause" type="checkbox" onclick="checkBoxAll(this)">
+            <label for="clause_all"><span>전체 동의</span></label>            
+          </div>
+          <ul class="boxGray">
+            <li class="mb28">
+              <input id="clause_01" name="check_clause" type="checkbox">
+              <label for="clause_01"><span class="fs16 cBlue fwM">[필수]</span><span class="fs16 cGray">서비스 이용약관 동의</span></label>
+              <a class="btn link" href="javascript:popUp('agree_service')"><span>링크</span></a>
+            </li>
+            <li class="mb28">
+              <input id="clause_02" name="check_clause" type="checkbox" checked>
+              <label for="clause_02"><span class="fs16 cBlue fwM">[필수]</span><span class="fs16 cGray">개인정보 수집이용 동의</span></label>
+              <a class="btn link" href="javascript:popUp('agree_personal_info')"><span>링크</span></a>
+            </li>
+            <li>
+              <input id="clause_03" name="check_clause" type="checkbox">
+              <label for="clause_03"><span class="fs16 cBlue fwM">[필수]</span><span class="fs16 cGray">민감정보 수집이용 동의</span></label>
+              <a class="btn link" href="javascript:popUp('agree_sensitive_info')"><span>링크</span></a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="fixedBox">
+        <div class="btnBox">
+          <a class="btn gray h60" href="#"><span>이전</span></a>
+          <a class="btn blue h60" href="#"><span>다음</span></a>
+          </div>
+      </div>  
+    </section>
+  </div>
+  <!-- //container -->
+
+  <!-- dimmed -->
+  <div class="dimmed off"></div>
+  <!-- popup 하단 팝업 -->
+  <div class="popup bottom off" poptarget="agree_service">
+    <div class="popCon">
+      <div class="alrmCon">
+        <p>서비스 이용약관 동의 팝업</p>
+        <div class="btnBox"><a class="btn blue h60 popClose" href="javascript:popUpClose()"><span>확인</span></a></div>
+      </div>
+    </div>
+  </div>
+  <!-- //popup 하단 팝업 -->
+
+  <!-- popup 하단 팝업 -->
+  <div class="popup bottom off" poptarget="agree_personal_info">
+    <div class="popCon">
+      <div class="alrmCon">
+        <p>개인정보 수집이용 동의 팝업</p>
+        <div class="btnBox"><a class="btn blue h60 popClose" href="javascript:popUpClose()"><span>확인</span></a></div>
+      </div>
+    </div>
+  </div>
+  <!-- //popup 하단 팝업 -->
+
+
+  <!-- popup 하단 팝업 -->
+  <div class="popup bottom off" poptarget="agree_sensitive_info">
+    <div class="popCon">
+      <div class="alrmCon">
+        <p>민감정보 수집이용 동의 팝업</p>
+        <div class="btnBox"><a class="btn blue h60 popClose" href="javascript:popUpClose()"><span>확인</span></a></div>
+      </div>
+    </div>
+  </div>
+  <!-- //popup 하단 팝업 -->
+
+</body>
+<!-- //body -->
+
+<!-- ui 동작 js 선언 -->
+<script type="text/javascript" src="../../static/js/ui.js"></script>
+</html>

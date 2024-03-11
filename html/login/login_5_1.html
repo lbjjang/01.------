@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Type" content="text/html; CHARSET=utf-8">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta name="Author" content="wwww.xxxx.xx.xx">
+  <meta name="title" content="마이키즈핏">
+  <meta name="keywords" content="마이키즈핏">
+  <meta name="description" content="마이키즈핏">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+</head>
+<!-- body -->
+<body>
+  <!-- container -->
+  <div class="container">
+    <section>
+      <div class="loginCon">
+        <p class="fs14 cBlue mt40 mb8"><strong>부모 정보 확인</strong></p>
+        <p class="fs24 cBl mb8"><strong>회원가입 전, 부모님의<br>정보 확인이 필요합니다.</strong></p>
+        <p class="fs16 cLGray mb38">사전에 전달받으신 확인 코드와 부모님의 이름,<br>생년월일, 휴대폰번호를 입력해 주세요.</p>
+
+        <div class="mb20">
+          <p class="fs16 fwM mb12">이름</p>
+          <input type="text" placeholder="이름을 입력해 주세요" >
+        </div>
+        <div class="mb20">
+          <p class="fs16 fwM mb12">생년월일</p>
+          <input type="text" placeholder="생년월일 6자를 입력해 주세요" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+        </div>
+        <div class="mb20">
+          <p class="fs16 fwM mb12">휴대폰번호</p>
+          <input type="text" placeholder="휴대폰번호를 입력해 주세요" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+        </div>
+        <div class="mb20">
+          <p class="fs16 fwM mb12">확인 코드</p>
+          <input type="text" placeholder="확인 코드를 입력해 주세요" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+        </div>
+      </div>
+
+      <div class="fixedBox">
+        <div class="btnBox">
+          <a class="btn blue h60" href="#"><span>다음</span></a>
+        </div>
+      </div>   
+      
+    </section>
+  </div>
+  <!-- //container -->
+</body>
+<!-- //body -->
+
+<!-- ui 동작 js 선언 -->
+<script type="text/javascript" src="../../static/js/ui.js"></script>
+</html>

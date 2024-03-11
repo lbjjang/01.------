@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=divice-width, user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
+        <title>퍼블리스트</title>
+		<link rel="stylesheet" href="static/css/style.css">
+        <script src="static_guide/js/jquery-1.11.1.js"></script>
+		<script src="static/js/ui.js"></script>
+    </head>    
+		<style>
+			* { margin: 0; padding: 0;}
+			body { font-family:"Pretendard", Arial,Sans-serif;min-width: 1200px;font-size:12px;}
+			html,body{position:  relative !important;overflow: scroll;}
+			#header { }
+			#header:after {
+					display: block;
+					content: "";
+					clear: both;
+			}
+			#header h1 {
+					float:left;
+					padding:20px 20px 10px;
+					font-weight: 700;
+					font-size: 30px;
+					color: #444;
+			}
+			#header .ribbon {
+					position: relative;
+					float:right;
+					width: 200px;
+					height: 30px;
+					color: #fff;
+					margin:7px 40px 0 0;
+					font-weight:bold;
+					font-size: 14px;
+					line-height: 30px;
+					text-align: center;
+					cursor: pointer;
+					text-transform: uppercase;
+					background: #00b2a6;
+					-webkit-animation: main .25s;
+					-moz-animation: main .25s;
+					animation: main .25s;
+			}
+			#header .ribbon i {
+					position: absolute;
+			}
+			#header .ribbon i:first-child,
+			#header .ribbon i:nth-child(2) {
+					left: -10px;
+					bottom: -10px;
+					z-index: -1;
+					border: 10px solid transparent;
+					border-right-color: #043140;
+					-webkit-animation: edge .5s;
+					-moz-animation: edge .5s;
+					animation: edge .5s;
+			}
+			#header .ribbon i:nth-child(2) {
+					left:auto;
+					right:-10px;
+					border-left-color: #043140;
+					border-right-color:transparent;
+			}
+			#header .ribbon i:nth-child(3),
+			#header .ribbon i:nth-child(4) {
+					z-index: -2;
+					width: 10px;
+					bottom: -10px;
+					left: -21px;
+					border: 15px solid rgb(3, 133, 138);
+					border-left-color: transparent;
+					
+					-webkit-animation: backRibbon .6ms;
+					-moz-animation: backRibbon .6s;
+					animation: backRibbon .6s;
+					/* 좌측 리본 : 좌측에서 우측으로 scale 이 커지도록 한다. */
+					-webkit-transform-origin: 100% 0;
+					-moz-transform-origin: 100% 0;
+					-ms-transform-origin: 100% 0;
+					transform-origin: 100% 0;
+			}
+			#header .ribbon i:nth-child(4) {
+					left: auto;
+					right: -21px;
+					border-right-color: transparent;
+					border-left-color: rgb(3, 133, 138);
+					/* 우측 리본 : 우측에서 좌측으로 scale 이 커지도록 한다. */
+					-webkit-transform-origin: 0 0;
+					-moz-transform-origin: 0 0;
+					-ms-transform-origin: 0 0;
+					transform-origin: 0 0;
+			}
+
+			/* animations */
+			/* webkit */
+			@-webkit-keyframes main {
+					0% { -webkit-transform: scaleX(0); }
+					100% { -webkit-transform: scaleX(1); }
+			}
+
+			@-webkit-keyframes edge {
+					0%, 50% { -webkit-transform: scaleY(0); }
+					100% { -webkit-transform: scaleY(1); }
+			}
+
+			@-webkit-keyframes backRibbon {
+					0%, 75% { -webkit-transform: scaleX(0); }
+					100% { -webkit-transform: scaleX(1); }
+			}
+
+			/* moz */
+			@-moz-keyframes main {
+					0% { -moz-transform: scaleX(0); }
+					100% { -moz-transform: scaleX(1); }
+			}
+
+			@-moz-keyframes edge {
+					0%, 50% { -moz-transform: scaleY(0); }
+					100% { -moz-transform: scaleY(1); }
+			}
+
+			@-moz-keyframes backRibbon {
+					0%, 75% { -moz-transform: scaleX(0); }
+					100% { -moz-transform: scaleX(1); }
+			}
+
+			/* standard */
+			@keyframes main {
+					0% { transform: scaleX(0); }
+					100% { transform: scaleX(1); }
+			}
+
+			@keyframes edge {
+					0%, 50% { transform: scaleY(0); }
+					100% { transform: scaleY(1); }
+			}
+
+			@keyframes backRibbon {
+					0%, 75% { transform: scaleX(0); }
+					100% { transform: scaleX(1); }
+			}
+
+			#wrap {padding:0 10px;}
+			#wrap h3 { display: inline-block; margin-right: 50px; font:bold 16pt/130%;color:#c3122f;}
+			#wrap section > h3, footer h3 {padding-left:10px; border-left:10px solid #c3122f;  }
+			#wrap h4 { position: relative; margin:0 0 5px 0;font:bold 11pt/130%;color:#347bfc;}
+			#wrap h4 .progress { display: inline-block; position: absolute; right: 0;bottom: -3px; color: #c3122f;}
+			#wrap h4.h4_first {margin-top:20px;}
+			#wrap .wid {display: inline-block;width:150px}
+
+			.total { float: right; color: #666; font-size: 13px;}
+			p.total span { font-weight: bold; color: #fff; font-size: 14px;}
+			.btn-guide {display: none; margin-left: 50px;}
+
+			.btn-guide a {
+					padding: 5px 20px;
+					text-decoration: none;
+					position: relative;
+					display: inline-block;
+					color: #6e6e6e;
+					box-shadow: inset 0 0 0 0.125em #7b9ede;
+					background-color: transparent;
+					transition: color 0.2s ease-out, box-shadow 0.2s ease-out, background-color 0.2s ease-out, font-size 0.2s;
+			}
+			.btn-guide a:after {
+					content: '';
+					display: block;
+					width: 100%;
+					height: 100%;
+					position: absolute;
+					top: 2px;
+					left: 2px;
+					border-bottom: 1px solid #95acdc;
+					border-right:1px solid #95acdc;
+			}
+			.btn-guide a:hover {
+					color: #7f7f7f;
+					font-weight: bold;
+					background-color: #e2e2e2;
+					box-shadow: inset 0 0 0 0.125em transparent;
+			}
+			.btn-guide a:hover:after {
+					border-color: #d0cfcf;
+			}
+			.btn-guide a:active {
+					transform: translate(2px, 2px);
+			}
+			.btn-guide a:active:after {
+					transform: translate(-2px, -2px);
+			}
+
+			table {width:100%;border-spacing:0;border-collapse:collapse;border:1px solid #ddd; color:#555;}
+			caption {padding:0 0 5px 0;text-align:right;}
+			thead {background-color:#f9f9f9;}
+			thead th {/* background-color:#343434; */ /* padding: 7px 10px; */ /* color: #fff; */}
+			th,td {/* padding:3px 4px; *//* border-top:1px solid #ddd; *//* border-right:1px solid #ddd; */}
+			td a {color:#125fae;text-decoration:none;display: block;cursor: pointer;}
+			td a b{display: block;cursor: pointer;}
+			.dowork td a:hover {color:#444;text-decoration:underline;}
+			tbody tr.line { border-top: 2px solid #666;}
+			.dowork tbody tr:hover td{background:#eee; font-weight: bold;}
+			tbody .odd td {background:#fafafa;}
+			.tac {text-align:center;}
+
+			.guide-wrap { margin-top: 20px;}
+
+			/* guide-tab */
+			.guide-tap ul { *zomm:1; border-bottom: 1px solid #000;}
+			.guide-tap ul:after { content: ""; display: block; overflow: hidden; clear: both;}
+			.guide-tap ul li { float: left; position: relative; height: 31px; }
+			.guide-tap ul li a { display: block; padding: 0 12px; background-color: #f5f5f5; color: #7a7a7a; border:solid #c6c9ca; border-width: 1px 1px 0 0; text-align: center; line-height:30px; cursor: pointer;}
+			.guide-tap ul li.active a { position: relative;border:1px solid #000;border-bottom: 1px solid #fff; margin-left:-1px;background-color: #fff; color: #000; font-weight: bold;}
+			.guide-tap ul li:first-child a { border-left: 1px solid #c6c9ca;}
+			.guide-tap ul li.active:first-child a { border-left: 1px solid #000; margin-left: 0;}
+
+			.guide-contents { margin-top: 50px;}
+			.guide-type { margin-bottom: 40px;}
+			.guide_tit { margin-bottom: 10px; color: #fff; padding: 4px 15px 8px; background: #3d3d3d; border-left: 7px solid #ff2b40; }
+			.sub-tit { margin-bottom: 15px; color: #152e45; font-size: 14px;}
+			.sub-tit span { padding: 5px 15px 5px 5px; border-top: 3px solid #347BFC; font-weight: bold; }
+			.guide_tb {width:100%}
+			.guide_tb thead{background:#f9f9f9}
+			.guide_tb thead th {background: #eaf2f5; color: #6286A8;font-weight: bold;}
+			.guide_tb th{padding:10px 20px 7px; text-align:center}
+			.guide_tb th+th{/* border-right:none */}
+			.guide_tb tbody td:first-child {}
+			.guide_tb td{padding:10px 20px 7px; text-align:left}
+			.guide_tb td.bd{border-right-width:1px;background-color:#f7fcfc}
+			.guide_tb em{ font-weight:bold;font-size:18px}
+			.description {position:relative; background: #eeefef; border:3px solid #c3c4c5; margin:0 0 2em 0; padding:1em; overflow:auto; }
+			.description ul { padding-left: 20px; }
+			.description ul li { list-style-type: disc; line-height: 20px; font-size: 11px; color: #333;}
+
+			hr.line { border-bottom: 2px solid #565553; margin-bottom: 30px;}
+			#contents { margin: 0 10px 10px;padding-top:60px;}
+			.tal {text-align: left !important; }
+			.state-wrap {
+					overflow: hidden;
+					padding: 20px 10px 20px 0;
+					background-color: rgba(255,255,255,.3);
+					margin: 5px 0;
+			}
+			.state-group strong { display: inline-block;border-left:5px solid #3d3d3d; padding-left: 5px;}
+			.state-group {float: left;}
+			.state {font-size: .95em;text-align: center;}
+			.state-group .state + .state {margin-left: 10px;}
+			.state span { display: inline-block;width: 18px;height: 18px; font-size: 12px;color: #fff;line-height: 18px;}
+			.state .undecided {border-radius:20px;background-color: #31334b;}
+			.state .edit {border-radius:20px;background-color: #0085fe;}
+			.state .delete {border-radius:20px;background-color: #f0104f;}
+			.state .complete {border-radius:20px;background-color: #00b2a6;}
+			.total {float: right;font-size: 15px;color: #fff;}
+			.total span {font-size: 13px;}
+			.per {background:#00b2a6;display: inline-block;padding: 6px 15px 6px; margin-right: 20px;border-radius: 20px;}
+			.status { background-color: #00b2a6; display: inline-block;padding: 6px 15px 6px;border-radius: 20px;}
+			.quest {background: rgba(240, 16, 79, 0.2);}
+			.comp {background: rgba(0, 178, 166, 0.2);}
+			table {width: 100%;table-layout: fixed;border-collapse:collapse;border:none}
+			.working-list thead th {background-color: #f0f4f7;font-size: 12px;border:none;padding: 5px;color: #4d5967;border-left:1px solid #fff;}
+			.working-list thead th:first-child{border-left: 0;}
+			.working-list tbody tr:hover { background-color: #ddfaf8 !important;}
+			.working-list tbody td {text-align: center;border: 1px solid #cacaca;padding: 5px 5px 5px 10px;line-height: 1.5;font-size: 12px; color: #333;}
+			.working-list tbody tr .depth { color: #2c333b;}
+			.working-list tbody tr.del td { background: #fff !important;text-decoration: line-through;}
+			.working-list tbody .linetitle td {font-weight: bold;text-align: left; padding: 0; border:0;}
+			.working-list tbody .linetitle:hover { background-color: transparent !important;}
+			.working-list tbody .linetitle:first-child td .sub-tit { margin-top: 3px;}
+			.working-list tbody .linetitle td .sub-tit { margin:16px 0 0;background-color: #fff;padding: 5px 5px 5px 0;/*color: #ffae00;*/ color: #2c333b;font-size: 20px;line-height: 26px;}
+			.working-list tbody td:last-child{text-align: left;}
+			.working-list select { height: 24px; padding-bottom: 2px;line-height: 24px; border: 1px solid #ccc; font-size: 12px;}
+			hr { margin: 20px 0;border:0;border-bottom: solid 1px #ddd;}
+			footer:after {display:block;content:"";clear:both;}
+			footer .author {display: flex;justify-content: end;}
+			footer h3 {float:left; color: #c3122f; }
+			footer dl {overflow: hidden; padding:3px 10px 0 30px; margin-left: 50px; color: #444; display: flex;}
+			footer dt,
+			footer dd{
+				animation: bgHey 4s ease-in infinite;
+				-webkit-text-fill-color: transparent;
+				color: transparent;
+				background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
+				-webkit-background-clip: text;
+				background-clip: text;
+			}
+			@keyframes bgHey {
+				10%{background-image: linear-gradient( 135deg, #FCCF31 10%, #F55555 100%);}
+				20%{background-image: linear-gradient( 135deg, #A0FE65 10%, #FA016D 100%);}
+				30%{background-image: linear-gradient( 135deg, #5EFCE8 10%, #736EFE 100%);}
+				40%{background-image: linear-gradient( 135deg, #F6CEEC 10%, #D939CD 100%);}
+				50%{background-image: linear-gradient( 135deg, #F0FF00 10%, #58CFFB 100%);}
+				60%{background-image: linear-gradient( 135deg, #F6D242 10%, #FF52E5 100%);}
+				70%{background-image: linear-gradient( 135deg, #72EDF2 10%, #5151E5 100%);}
+				80%{background-image: linear-gradient( 135deg, #FFA8A8 10%, #FCFF00 100%);}
+				90%{background-image: linear-gradient( 135deg, #FAB2FF 10%, #1904E5 100%);}
+				100%{background-image: linear-gradient( 135deg, #69FF97 10%, #00E4FF 100%);}
+			}
+
+			.endLine{text-decoration: line-through;color:rgba(195, 18, 47,0.7);display: block;}
+			dt {font-weight:bold;color:#888;}
+			dd { margin-left: 45px;}
+			.img_swipe {
+					font-size: 0;
+					line-height: 0;
+					display: inline-block;
+					width: 6px;
+					height: 10px;
+					margin-left: 5px;
+					text-indent: -9999px;
+					overflow: hidden;
+			}
+			.bounce_ani {
+					-webkit-animation:horizontalBounce 5s linear infinite both;
+					animation:horizontalBounce 5s linear infinite both;
+			}
+			@-webkit-keyframes horizontalBounce {
+					0%, 10%, 30%, 50%, 70%, 90%, 100% {
+							-webkit-transform: translateX(0);
+							transform: translateX(0);
+					}
+					
+					20%, 40%, 60%, 80% {
+							-webkit-transform: translateX(10px);
+							transform: translateX(10px);
+					}
+			}
+
+		</style>
+    <body>
+			<header>
+				<div id="header">
+						<h1>퍼블리싱 리스트</h1>
+							<h2 class="ribbon">
+								Project Publishing
+								<i></i>
+								<i></i>
+								<i></i>
+								<i></i>
+						</h2>
+					</div>
+			</header>
+			<style>
+				.rtxt{color:#000;position: absolute;left: 50%;width: 200px;margin-left: -100px;bottom: -32px;font-size: 12px;line-height: 14px;
+					opacity: 0;animation: fadeIn 4s forwards;
+					-webkit-text-fill-color: transparent; 
+color: transparent;
+background-image: linear-gradient( 135deg, #43CBFF 10%, #9708CC 100%);
+-webkit-background-clip: text;
+background-clip: text;}
+				@keyframes fadeIn {
+				0% {opacity: 0;}
+				15%{opacity: 1;background-image: linear-gradient( 135deg, #FF6FD8 10%, #3813C2 100%);}
+				30% {opacity: 0;}
+				45%{opacity: 1;background-image: linear-gradient( 135deg, #FD6E6A 10%, #FFC600 100%);}
+				60% {opacity: 0;}
+				75%{opacity: 1;background-image: linear-gradient( 135deg, #FFCF71 10%, #2376DD 100%);}
+			}
+			</style>
+			<section id="contents">
+				<div class="state-wrap">
+						<div class="state-group">
+						<strong>진행상태</strong> : &nbsp;
+						<span class="state"><span class="undecided">미</span></span> 미정,
+						<span class="state"><span class="delete">삭</span></span> 삭제,
+						<span class="state"><span class="edit">중</span></span> 진행 및 수정 중,
+						<span class="state"><span class="complete">완</span></span> 완료
+						<div class="btn-guide"><a href="layout.html" class="on">Go to WSG <span class="img_swipe bounce_ani">화살표</span></a></div>
+				</div>
+				<p class="total"><span class="per">종합 진척률 : <span class="result"></span></span> <span class="comp"></span></p>
+				</div>
+				
+				<table border="0" class="working-list">
+						<colgroup>
+								<col style="width:5%;"/>
+								<col style="width:20%;"/>
+								<col style="width:15%;"/>
+								<col style="width:8%;"/>
+								<col style="width:10%;"/>
+								<col style="width:8%;"/>
+								<col style="width:auto;"/>
+						</colgroup>
+						<thead>
+						<tr>
+								<th>No</th>
+								<th>메뉴명</th>
+								<th>경로</th>
+								<th>
+										<select name="select" id="">
+												<option value="">담당자</option>
+										</select>
+								</th>
+								<th>
+										<select name="select">
+												<option value="">date</option>
+										</select>
+								</th>
+								<th>퍼블 상태</th>
+								<th>특이사항</th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr class="linetitle">
+								<td>
+									<div class="sub-tit">로그인 & 회원가입</div>
+								</td>
+							</tr>
+							<tr>
+								<td>앱권한동의</td>
+								<td>/html/login/login_1_pop.html</td>
+								<td>이병준</td>
+								<td>2024-02-27</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>			
+							<tr>
+								<td>앱 업데이트</td>
+								<td>/html/login/login_2_pop.html</td>
+								<td>이병준</td>
+								<td>2024-02-27</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>										
+							<tr>
+								<td>로그인</td>
+								<td>/html/login/login_3.html</td>
+								<td>이병준</td>
+								<td>2024-02-27</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>서비스소개</td>
+								<td>/html/login/login_4.html</td>
+								<td>이병준</td>
+								<td>2024-03-5</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>부모정보확인</td>
+								<td>/html/login/login_5_1.html</td>
+								<td>이병준</td>
+								<td>2024-02-27</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>아동정보확인</td>
+								<td>/html/login/login_5_2.html</td>
+								<td>이병준</td>
+								<td>2024-02-27</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>서비스동의</td>
+								<td>/html/login/login_5_3.html</td>
+								<td>이병준</td>
+								<td>2024-02-27</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>설문안내</td>
+								<td>/html/login/login_6.html</td>
+								<td>이병준</td>
+								<td>2024-02-27</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>부모설문</td>
+								<td>/html/login/login_6_1.html</td>
+								<td>이병준</td>
+								<td>2024-03-04</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>부모설문_결과</td>
+								<td>/html/login/login_6_2.html</td>
+								<td>이병준</td>
+								<td>2024-03-05</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>아동설문</td>
+								<td>/html/login/login_6_3.html</td>
+								<td>이병준</td>
+								<td>2024-03-04</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>설문안내_계정설정</td>
+								<td>/html/login/login_6_4.html</td>
+								<td>이병준</td>
+								<td>2024-03-04</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>설문안내_가입완료</td>
+								<td>/html/login/login_6_5.html</td>
+								<td>이병준</td>
+								<td>2024-03-04</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+
+							<tr class="linetitle">
+								<td>
+									<div class="sub-tit">메인</div>
+								</td>
+							</tr>
+							<tr class="linetitle">
+								<td>
+									<div class="sub-tit">정보숲</div>
+								</td>
+							</tr>
+							<tr class="linetitle">
+								<td>
+									<div class="sub-tit">목표설정</div>
+								</td>
+							</tr>
+							<tr class="linetitle">
+								<td>
+									<div class="sub-tit">목표 및 일상관리</div>
+								</td>
+							</tr>
+							<!-- <tr>
+								<td>서브메인</td>
+								<td>/html/manage/manage_1.html</td>
+								<td>이병준</td>
+								<td>2024-03-11</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	 -->
+
+
+
+							<tr class="linetitle">
+								<td>
+									<div class="sub-tit">마이페이지</div>
+								</td>
+							</tr>
+							<tr>
+								<td>마이페이지</td>
+								<td>/html/mypage/mypage_1_1.html</td>
+								<td>이병준</td>
+								<td>2024-03-08</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>알림함_알림없는경우</td>
+								<td>/html/mypage/mypage_2_1.html</td>
+								<td>이병준</td>
+								<td>2024-03-08</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>알림함_알림있는경우</td>
+								<td>/html/mypage/mypage_2_2.html</td>
+								<td>이병준</td>
+								<td>2024-03-08</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>양육일기_기록이없는경우</td>
+								<td>/html/mypage/mypage_3_1.html</td>
+								<td>이병준</td>
+								<td>2024-03-08</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>양육일기_기록이있는경우</td>
+								<td>/html/mypage/mypage_3_2.html</td>
+								<td>이병준</td>
+								<td>2024-03-08</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>양육일기_등록</td>
+								<td>/html/mypage/mypage_3_3.html</td>
+								<td>이병준</td>
+								<td>2024-03-11</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>양육일기_상세</td>
+								<td>/html/mypage/mypage_3_4.html</td>
+								<td>이병준</td>
+								<td>2024-03-11</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>								
+							<tr>
+								<td>설정</td>
+								<td>/html/mypage/mypage_4_1.html</td>
+								<td>이병준</td>
+								<td>2024-03-11</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>		
+							<tr>
+								<td>비밀번호 확인</td>
+								<td>/html/mypage/mypage_4_2.html</td>
+								<td>이병준</td>
+								<td>2024-03-11</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>							
+
+							<tr class="linetitle">
+								<td>
+									<div class="sub-tit">고객센터</div>
+								</td>
+							</tr>
+							<tr>
+								<td>고객센터 메인</td>
+								<td>/html/customer/customer_1.html</td>
+								<td>이병준</td>
+								<td>2024-03-05</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>공지사항_없는 경우</td>
+								<td>/html/customer/customer_2_1.html</td>
+								<td>이병준</td>
+								<td>2024-03-06</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>공지사항_있는 경우</td>
+								<td>/html/customer/customer_2_2.html</td>
+								<td>이병준</td>
+								<td>2024-03-06</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>공지사항_상세페이지</td>
+								<td>/html/customer/customer_2_3.html</td>
+								<td>이병준</td>
+								<td>2024-03-06</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>자주하는 질문</td>
+								<td>/html/customer/customer_3.html</td>
+								<td>이병준</td>
+								<td>2024-03-06</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>1:1문의_문의 없는 경우</td>
+								<td>/html/customer/customer_4_1.html</td>
+								<td>이병준</td>
+								<td>2024-03-06</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>1:1문의_문의 있는 경우</td>
+								<td>/html/customer/customer_4_2.html</td>
+								<td>이병준</td>
+								<td>2024-03-06</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>1:1문의_등록</td>
+								<td>/html/customer/customer_4_3.html</td>
+								<td>이병준</td>
+								<td>2024-03-06</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>1:1문의_답변대기</td>
+								<td>/html/customer/customer_4_4.html</td>
+								<td>이병준</td>
+								<td>2024-03-06</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>1:1문의_답변완료</td>
+								<td>/html/customer/customer_4_5.html</td>
+								<td>이병준</td>
+								<td>2024-03-06</td>
+								<td><span class="state"><span class="complete"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+
+
+							<tr class="linetitle">
+								<td>
+									<div class="sub-tit">퍼블가이드 - 정리중</div>
+								</td>
+							</tr>
+							<tr>
+								<td>헤더 및 하단 fixed 메뉴</td>
+								<td>/guide/header_menu.html</td>
+								<td>이병준</td>
+								<td></td>
+								<td><span class="state"><span class="undecided"></span></span></td>
+								<td>
+								</td>
+							</tr>								
+							<tr>
+								<td>버튼</td>
+								<td>/guide/button.html</td>
+								<td>이병준</td>
+								<td></td>
+								<td><span class="state"><span class="undecided"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>Input</td>
+								<td>/guide/input.html</td>
+								<td>이병준</td>
+								<td></td>
+								<td><span class="state"><span class="undecided"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>팝업</td>
+								<td>/guide/popup_bottom.html</td>
+								<td>이병준</td>
+								<td></td>
+								<td><span class="state"><span class="undecided"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+							<tr>
+								<td>텍스트</td>
+								<td>/guide/text.html</td>
+								<td>이병준</td>
+								<td></td>
+								<td><span class="state"><span class="undecided"></span></span></td>
+								<td>
+								</td>
+							</tr>	
+			
+						</tbody>				
+				</table>
+			</section>
+
+
+
+
+			
+    </body>
+
+
+
+
+		<script>
+			$(function(){
+				// 번호 자동생성, 링크 자동생성
+				var $workTbody = $('.working-list tbody'),
+						itemlist   = $workTbody.find('tr:not(".linetitle")'),
+						del        = $workTbody.find('.del'),
+						$tds       = $workTbody.find('td'),
+						arrayItem  = $.makeArray(itemlist),
+						$lineTitle = $workTbody.find('.linetitle td'),
+						i          = 0;
+				
+				// 테이블내의 서브타이틀 영역의 colspan 정의
+				var totalcolspan = $('table thead th').length;
+				$lineTitle.attr('colspan', totalcolspan);
+				
+				// 진척률 생성
+				var $complete  = itemlist.find('td:nth-child(5)'), // 행마다 마지막 td
+						groupTotal = ($complete.length - del.length),
+						delCnt = del.find('.complete').length,
+						comTotal   = ($complete.find('.complete').length - delCnt);
+				
+				var groupProgress = (comTotal / groupTotal) * 100;
+				
+				$('.total').html(
+						'<span class="per">종합 진척률 : '
+						+ ~~groupProgress
+						+ '%</span>'
+						+ '<span class="status">'
+						+ comTotal
+						+ '/'
+						+ groupTotal
+						+ ' (완료 / 총 본수)</span>'
+				);
+				
+				for(; i < arrayItem.length; i++) {
+						var item = arrayItem[i]; // 각각 tr 참조
+						$(item).prepend("<td></td>"); // 첫번째 td 생성(number 영역)
+						
+						// 파일 디렉토리 영역의 링크 생성
+						var $cols = $(item).children('td');
+						var $col01 = $cols.eq(1),
+								$col02 = $cols.eq(2),
+								$col03 = $cols.eq(3),
+								$col04 = $cols.eq(4);
+						
+						var url = $cols.eq(2);
+						if($(item).is('.del')) {
+								$col02.html('<span class="url">' + url.html() + '</span>');
+						} else {
+								$col02.html('<a href=".' + url.html() + '" target="_blank" class="url">' + '<b style="color:#437cbc;">'+url.html() + '</b></a>');
+								// $col02.html('<a href=".' + url.html() + '" class="url">' + '<b style="color:#437cbc;">'+url.html() + '</b></a>');
+								// 서버용
+								// $col02.html('<a href="/hana' + url.html() + '" target="_blank" class="url">' + '<b style="color:#437cbc;">'+url.html() + '</b></a>');
+						}
+						
+						var depthStr = $col01.text(),
+								depthEm = depthStr.substr(depthStr.lastIndexOf('>') + 1);
+						
+						$col01.html(depthStr.replace( depthEm,'<b style="color:#4b4b4b;">' + depthEm + '</b>'));
+						
+						$col01.addClass('tal depth');
+						$col02.addClass('tal');
+						$col03.addClass('publ');
+						$col04.addClass('date');
+						
+				}
+				
+				// 검수요청,완료 여부에 따른 클래스 부여 및 상태란의 텍스트 생성
+				itemlist.each(function(){
+						var $this  = $(this),
+								tdStr  = $this.find('td').eq(1).text(),
+								newStr = tdStr.substr(tdStr.lastIndexOf('>') + 1),
+								$tds   = $this.find('td');
+						
+						var state = $this.find('td:nth-child(6)');
+						state.find('.undecided').text('미');
+						state.find('.delete').text('삭');
+						state.find('.edit').text('중');
+						state.find('.complete').text('완');
+						
+						var $inq    = $this.find('td').eq(5),
+								inqText = $inq.text();
+						
+						// if(inqText.indexOf('검수요청') > -1) {
+						// 		$inq.addClass('quest');
+						// } else if(inqText.indexOf('검수완료') > -1) {
+						// 		$this.addClass('comp');
+						// }
+						
+				});
+				
+				var $ths = $('.working-list thead th');
+				$ths.eq(0).append(' (' + groupTotal + ')');
+				$ths.eq(5).append(' (' + comTotal + ')');
+				
+		});
+
+
+		(function($) {
+				
+				function update() {
+						
+						var text, tr, select, visibleTr;
+						
+						visibleTr = $('tbody tr:visible');
+						tr = $('tbody tr:not(".linetitle")');
+						select = $('select');
+						text = [];
+						
+						// 셀렉트 값이 변경될 때마다 배열 text 에 참조
+						select.each(function() {
+								text.push($.trim($(this).find('option:selected').text() ));
+						});
+						
+						// jQuery.inArray : 배열 내의 값을 찾아서 인덱스를 반환합니다.(요소가 없을 경우 -1을 반환)
+						// 담당자 전체, 전체인 경우에 모든 table row 를 보여줌
+						if( ($.inArray('담당자', text) > -1) && ($.inArray('date', text) > -1) ) {
+								tr.show();
+						}
+						// 담당자 문자열이 아닌 이름을 선택하고 date 전체인 경우
+						else if( ($.inArray('담당자', text) == -1) && ($.inArray('date', text) > -1) ) {
+								tr.each(function() {
+										var $this = $(this);
+										if(text[0] == $this.find('.publ').text()) {
+												$this.show();
+										} else {
+												$this.hide();
+										}
+								})
+						}
+						// 담당자이고 전체가 아닌 날짜를 선택한 경우
+						else if( ($.inArray('담당자', text) > -1) && ($.inArray('date', text) == -1) ) {
+								tr.each(function() {
+										var $this = $(this);
+										if(text[1] == $this.find('.date').text()) {
+												$this.show();
+										} else {
+												$this.hide();
+										}
+								})
+						}
+						else if( ($.inArray('담당자', text) == -1) && ($.inArray('date', text) == -1) ) {
+								tr.each(function() {
+										var $this = $(this);
+										if(text[0] == $this.find('.publ').text() && text[1] == $this.find('.date').text()) {
+												$this.show();
+										} else {
+												$this.hide();
+										}
+								});
+								
+						}
+						
+				}
+				
+				$(document).on('change', 'select', update);
+				
+				// 날짜 컬럼을 셀렉트 박스에 차례대로 생성
+				function sortDate(idx, el) {
+						var worklist = $('.working-list'),
+								dateBox  = $('thead th').eq(idx),
+								dateData = [],
+								dateList = worklist.find( el+':visible');
+						
+						dateList.each(function() {
+								
+								var $this = $(this);
+								
+								if(!!$.trim($(this).text())) {
+										// 배열길이가 0 이면 날짜 컬럼 텍스트의 처음 문자열을 배열에 추가
+										if(dateData.length == 0) {
+												dateData.push($.trim($this.text()));
+												return;
+										}
+										// 배열에 해당 날짜 문자열이 없다면 dateDate 배열에 추가
+										if($.inArray($.trim( $this.text()), dateData) == -1) {
+												dateData.push($.trim($this.text()));
+										}
+										
+								}
+								
+						});
+						
+						var dateSort = dateData.sort(compareForSort);
+						
+						function compareForSort(first, second) {
+								if (first == second) {
+										return 0;
+								}
+								if (first < second) {
+										return -1;
+								} else {
+										return 1;
+								}
+						}
+						
+						// 배열에 저장된 날짜 모음을 셀렉트박스에 추가
+						for(var i = 0, max = dateSort.length; i < max; i++) {
+								dateBox.find('select').append('<option>' + dateSort[i] + '</option>');
+						}
+						
+				}
+				
+				// number 컬럼에 넘버 증가 및 서브타이틀의 총 갯수 정의
+				function countLine() {
+						var count       = 0,
+								linetitle   = $('.linetitle'),
+								titleLength = linetitle.length,
+								title,
+								tr          = $('tbody tr'),
+								length      = tr.length;
+						
+						linetitle.each(function(index) {
+								$(this).data('idx', index);
+						});
+						
+						tr.each(function(idx) {
+								var $this = $(this);
+								
+								
+								if($this.hasClass('linetitle')) {
+										// 최초 linetitle 은 count 가 증가하기 전이므로 - 1 하여 요소를 선택하지 않는다.
+										title = linetitle[$this.data('idx') - 1];
+										
+										// count 를 증가시킨후 linetitle 을 검색하도록 한다.
+										if(!!title) {
+												$(title).find('td .sub-tit').append(' (' + count + ')');
+												// linetitle 이 있다면 count 를 0 으로 초기화
+												count = 0;
+										}
+								} else {
+										$this.find('td:first-child').append(count + 1);
+										// del 클래스가 있으면 변수 count 를 증가시키지 않고 아니면 증가시킨다.
+										count = $this.hasClass('del') ? count : count + 1;
+								}
+								
+								// each 문이 모두 돌았을 때 즉, 마지막 .linetitle 의 count 를 참조
+								if(idx == length -1) {
+										title = linetitle[titleLength -1];
+										if(!!title) {
+												$(title).find('td .sub-tit').append(' (' + count + ')');
+										}
+								}
+								
+						})
+						
+				}
+				
+				function sortCount() {
+						var count = 0,
+								tr    = $('tbody tr:not(".del")');
+						
+						tr.each(function() {
+								var $this = $(this);
+								if(!$this.hasClass('linetitle') && $this.is(':visible')) {
+										count = count + 1;
+								}
+						});
+						
+						return count;
+						
+				}
+				
+				$(function(){
+						countLine();
+						sortDate(3, '.publ');
+						sortDate(4, '.date');
+
+						var $ribbon = $('#header .ribbon');
+						$ribbon.on('click', function () {
+								var $this   = $(this),
+										cloneEl = $this.clone(true);
+
+								$this.before(cloneEl);
+								$('.' + $this.attr('class') + ':last').remove();
+						});
+
+				});
+				
+		}(jQuery));
+		</script>
+
+<div class="dimBg"></div>
+<!-- alert 형식 -->
+
+
+<script>
+	window.onload = function(){
+		// dialogPop('popAlert231110');
+	}				
+</script>
+
+</html>
+
+
